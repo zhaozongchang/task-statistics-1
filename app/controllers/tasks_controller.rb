@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
-  before_action :authenticate_user! , only: [:new, :create]
+  before_action :authenticate_user! , only: [:new, :create, :update, :destroy]
+  before_action :find_task_and_check_permission, only: [:edit, :update, :destroy]
   def index
     @tasks = Task.all
   end
@@ -20,14 +21,15 @@ end
 
   def show
     @task = Task.find(params[:id])
+
   end
 
   def edit
-    @task = Task.find(params[:id])
+
   end
 
   def update
-    @task = Task.find(params[:id])
+
     if @task.update(task_params)
     redirect_to tasks_path
   else
@@ -36,7 +38,8 @@ end
   end
 
   def destroy
-    @task = Task.find(params[:id])
+
+
     @task.destroy
     redirect_to tasks_path, alert: "删除成功"
   end
@@ -45,6 +48,13 @@ end
 
   def task_params
     params.require(:task).permit(:title, :description, :score)
+  end
+
+  def find_task_and_check_permission
+    @task = Task.find(params[:id])
+    if current_user != @task.user
+      redirect_to root_path, alert: "你没有权限"
+    end
   end
 
 end
