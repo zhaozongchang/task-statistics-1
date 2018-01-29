@@ -1,0 +1,27 @@
+<%= form_for @task do |f| %>
+
+<% if @task.errors.any? %>
+<ul>
+  <% @task.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+</ul>
+<% end %>
+
+任务
+<br>
+<%= f.text_field :title %>
+<br>
+叙述
+<br>
+<%= f.text_area :description %>
+<br>
+得分
+<br>
+<%= f.text_field :score %>
+<br>
+<br>
+
+
+<%= f.submit "Submit", :disable_with => 'Submitting...' %>
+<% end %>
