@@ -9,6 +9,7 @@
         <td>任务</td>
         <td>叙述</td>
         <td>创建者</td>
+        <td>发表时间</td>
         <td>得分</td>
       </tr>
     </thead>
@@ -19,6 +20,7 @@
           <td><%= link_to(task.title, task_path(task)) %></td>
           <td><%= task.description %></td>
           <td><%= task.user.email %></td>
+          <td><%= task.created_at %></td>
           <td><%= task.score %></td>
           <td>
             <% if current_user && current_user == task.user %>

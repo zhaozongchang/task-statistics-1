@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :authenticate_user! , only: [:new, :create, :update, :destroy]
   before_action :find_task_and_check_permission, only: [:edit, :update, :destroy]
   def index
-    @tasks = Task.all
+    @tasks = Task.all.order("created_at DESC")
   end
 
   def new
