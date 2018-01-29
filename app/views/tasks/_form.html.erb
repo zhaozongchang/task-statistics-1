@@ -1,21 +1,8 @@
-<%= form_for @task do |f| %>
-
-<div class="form-task">
-    <div class="form-task string optional">
-        <%= f.label "任务", :class => "string optional control-label" %>
-        <%= f.text_field :title, :class => "string optional form-control" %>
-    </div>
-
-    <div class="form-task string optional">
-        <%= f.label "叙述", :class => "string optional control-label" %>
-        <%= f.text_area :description, :class => "string optional form-control" %>
-    </div>
-
-    <div class="form-task string optional">
-        <%= f.label "得分", :class => "string optional control-label" %>
-        <%= f.text_area :score, :class => "string optional form-control" %>
-    </div>
-
-</div>
-<%= f.submit "Submit", class: "btn btn-primary", data: { disable_with: "Submiting..." } %>
+<%= simple_form_for @task do |f| %>
+  <div class="form-group">
+    <%= f.input :title, input_html: { class: "form-control"} %>
+    <%= f.input :description, input_html: { class: "form-control"} %>
+    <%= f.input :score, input_html: { class: "form-control"} %>
+  </div>
+  <%= f.submit "Submit", class: "btn btn-primary", data: { disable_with: "Submiting..." } %>
 <% end %>
