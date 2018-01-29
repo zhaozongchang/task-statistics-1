@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :authenticate_user! , only: [:new]
+  before_action :authenticate_user! , only: [:new, :create]
   def index
     @tasks = Task.all
   end
@@ -10,6 +10,7 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
+    @task.user = current_user
     if @task.save
     redirect_to tasks_path
   else
