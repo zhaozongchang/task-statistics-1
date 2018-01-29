@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  before_action :authenticate_user! , only: [:new]
   def index
     @tasks = Task.all
   end
@@ -30,7 +31,7 @@ end
     redirect_to tasks_path
   else
     render :edit
-   end 
+   end
   end
 
   def destroy
