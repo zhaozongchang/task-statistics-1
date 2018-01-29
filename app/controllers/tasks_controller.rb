@@ -9,9 +9,12 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
-    @task.save
+    if @task.save
     redirect_to tasks_path
+  else
+    render :new
   end
+end
 
   def show
     @task = Task.find(params[:id])
@@ -31,7 +34,7 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     @task.destroy
     redirect_to tasks_path, alert: "删除成功"
-  end 
+  end
 
   private
 
