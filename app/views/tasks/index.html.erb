@@ -2,36 +2,49 @@
   <div class="task">
     <%= link_to("新增任务", new_task_path, class: "btn btn-primary pull-right") %>
   </div>
-  <table class="table table-hover">
+  <table class="table table-bordered">
     <thead>
       <tr>
-        <td>#</td>
-        <td>任务</td>
-        <td>叙述</td>
-        <td>创建者</td>
-        <td>发表时间</td>
-        <td>得分</td>
+        <th>发布时间</th>
+        <th>任务</th>
+        <th>叙述</th>
+        <th>创建者</th>
+        <th>得分</th>
       </tr>
     </thead>
     <tbody>
       <% @tasks.each do |task| %>
         <tr>
-          <td>#</td>
-          <td><%= link_to(task.title, task_path(task)) %></td>
-          <td><%= task.description %></td>
-          <td><%= task.user.email %></td>
           <td><%= task.created_at %></td>
-          <td><%= task.score %></td>
-          <td>
-            <% if current_user && current_user == task.user %>
+          <td><%= link_to(task.title, task_path(task)) %>
+             <% if current_user && current_user == task.user %>
+            <div class="pull-right">
               <%= link_to("Edit", edit_task_path(task), class: "btn btn-sm btn-default")%>
               <%= link_to("Delete", task_path(task),    class: "btn btn-sm btn-default",
                           method: :delete, data: { confirm: "Are you sure?" } )%>
-              <% end %>
+            </div>
+          <% end %>
           </td>
-          <td></td>
+          <td><%= task.description %></td>
+          </td>
+          <td><%= task.user.email %></td>
+          <td><%= task.score %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
+  <br>
+
+    <div class="total clearfix">
+      <span class="pull-right">
+         <span>
+            <% sum = 0 %>
+            <% @tasks.each do |task| %>
+            <% %>
+            <% sum = sum + task.score %>
+            <% end %>
+            <h4>总计 <%= sum %> 分</h4>
+         </span>
+      </span>
+    </div>
 </div>
