@@ -52,9 +52,7 @@ end
 
   def find_task_and_check_permission
     @task = Task.find(params[:id])
-    if current_user != @task.user
-      redirect_to root_path, alert: "你没有权限"
-    end
+    
   end
 
 end
