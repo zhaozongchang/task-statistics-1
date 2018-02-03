@@ -6,7 +6,7 @@ class Admin::TasksController < ApplicationController
   before_action :admin_required
 
   def index
-    @tasks = Task.all
+    @tasks = Task.all.recent.paginate(:page => params[:page], :per_page => 10)
   end
 
   def new

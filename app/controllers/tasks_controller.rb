@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :authenticate_user! , only: [:new, :create, :update, :destroy]
   before_action :find_task_and_check_permission, only: [:edit, :update, :destroy]
   def index
-    @tasks = Task.all.order("created_at DESC")
+    @tasks = Task.all.recent.paginate(:page => params[:page], :per_page => 10)
   end
 
   def new
@@ -52,7 +52,7 @@ end
 
   def find_task_and_check_permission
     @task = Task.find(params[:id])
-    
+
   end
 
 end

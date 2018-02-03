@@ -25,7 +25,7 @@
             </div>
 
           </td>
-          <td><%= task.description %></td>
+          <td><%= simple_format(task.description) %></td>
 
           <td><%= task.user.email %></td>
           <td><%= task.score %></td>
@@ -44,4 +44,8 @@
         <h4>总计 <%= sum %> 分</h4>
      </span>
   </span>
+
+  <div class="text-center">
+    <%= will_paginate @tasks %>
+  </div>
 </div>
